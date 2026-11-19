@@ -2,7 +2,7 @@
 # Coral theme for Jellyfin — one-time server install.
 #
 #   sudo ./install.sh                 # link the theme CSS from the CDN (updates follow the repo)
-#   sudo ./install.sh --inline        # embed dist/coral.css instead (no CDN dependency, no auto-updates)
+#   sudo ./install.sh --inline        # embed dist/coral.css instead (works offline, no auto-updates)
 #   sudo ./install.sh --no-restart    # write everything but don't restart Jellyfin
 #   CSS_URL=https://... sudo ./install.sh   # link a different CSS URL (e.g. a pinned tag)
 #
@@ -13,7 +13,7 @@
 #      (originals saved in /opt/coral-jellyfin-branding/orig), plus an apt hook that re-applies them after upgrades
 #   4. Restarts Jellyfin so the new branding.xml is loaded
 set -e
-REPO_URL_DEFAULT="https://cdn.jsdelivr.net/gh/mattkje/coral-jellyfin@main/dist/coral.css"
+REPO_URL_DEFAULT="https://mattkje.github.io/coral-jellyfin/dist/coral.css"
 CSS_URL="${CSS_URL:-$REPO_URL_DEFAULT}"
 INLINE=0; RESTART=1
 for a in "$@"; do case "$a" in

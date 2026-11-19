@@ -13,14 +13,14 @@ The theme has two parts:
 
 | Part | How it gets there | Updates |
 |---|---|---|
-| Theme CSS (`dist/coral.css`) | One `@import` line in **Dashboard → General → Custom CSS** | Automatic: push to `main` |
+| Theme CSS (`dist/coral.css`) | One `@import` line in **Dashboard → General → Custom CSS** | Automatic: push to `main` (served by GitHub Pages) |
 | Splashscreen, favicon, app icons, loading screen | `install.sh` copies files into the server | Re-run `install.sh` |
 
 On a Debian/Ubuntu package install, clone the repo on the server and run:
 
 ```sh
-sudo ./install.sh            # links the CSS from the CDN, installs splash + icons, restarts Jellyfin
-sudo ./install.sh --inline   # embeds the CSS instead (no CDN dependency, no automatic updates)
+sudo ./install.sh            # links the CSS from GitHub Pages, installs splash + icons, restarts Jellyfin
+sudo ./install.sh --inline   # embeds the CSS instead (works offline, no automatic updates)
 ```
 
 The installer backs up `branding.xml`, keeps any login disclaimer, saves the original jellyfin-web
@@ -30,7 +30,7 @@ Jellyfin upgrades.
 **CSS only** (any install type, including Docker): paste this into Custom CSS and save:
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/mattkje/coral-jellyfin@main/dist/coral.css");
+@import url("https://mattkje.github.io/coral-jellyfin/dist/coral.css");
 ```
 
 ## Updating the theme
@@ -39,11 +39,10 @@ Jellyfin upgrades.
 # edit src/theme.css (or tabler/map.py for icons), then
 ./build.sh
 git commit -am "…" && git push
-curl -s https://purge.jsdelivr.net/gh/mattkje/coral-jellyfin@main/dist/coral.css   # skip jsDelivr's cache
 ```
 
-jsDelivr caches `@main` files for up to 12 hours unless purged. Browsers may also keep the old file
-for a while, so use a hard refresh (Ctrl+Shift+R) to check a change.
+GitHub Pages publishes the push within a minute or two, and browsers cache the file for 10 minutes,
+so servers pick up changes on their own. Hard-refresh (Ctrl+Shift+R) to see a change right away.
 
 ## Layout
 
