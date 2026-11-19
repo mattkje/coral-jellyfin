@@ -1,0 +1,8 @@
+{
+  "name": "coral-jellyfin-icons",
+  "private": true,
+  "description": "Tabler icons used to build dist/coral.css (see gen.py / map.py)",
+  "dependencies": {
+    "@tabler/icons": "3.24.0"
+  }
+}
