@@ -46,7 +46,7 @@ so servers pick up changes on their own. Hard-refresh (Ctrl+Shift+R) to see a ch
 
 ## Holiday season
 
-From 1 December to 2 January the theme adds snow, Christmas lights, a Santa hat on the logo and a warm glow.
+From 1 December to 2 January the theme adds Christmas lights, a Santa hat on the logo and a warm glow.
 A GitHub Action rebuilds `dist/coral.css` every night, so the link switches on and off by itself.
 `holiday.mode` controls it: `auto` (date range), `on` or `off`; pushing a change to that file rebuilds right away.
 `dist/coral-holiday.css` always has the holiday layer, for previewing it any time.

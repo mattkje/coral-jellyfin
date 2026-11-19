@@ -7,80 +7,6 @@ html, .backgroundContainer, .ui-corner-all, .wizardStartForm {
     radial-gradient(900px 600px at 100% -10%, rgba(255 196 120 / .08), transparent 60%) !important;
 }
 
-/* snow: two fixed layers behind the content */
-.backgroundContainer { overflow: hidden; }
-.backgroundContainer::before, .backgroundContainer::after {
-  content: ""; position: absolute; left: -10%; right: -10%; pointer-events: none; will-change: transform;
-}
-.backgroundContainer::before {
-  top: -560px; height: calc(100% + 560px); background-size: 560px 560px;
-  background-image:
-    radial-gradient(3.2px 3.2px at 385px 331px, rgba(255,255,255,0.8) 50%, transparent 100%),
-    radial-gradient(2.2px 2.2px at 500px 339px, rgba(255,255,255,0.88) 50%, transparent 100%),
-    radial-gradient(2.4px 2.4px at 132px 326px, rgba(255,255,255,0.72) 50%, transparent 100%),
-    radial-gradient(3.0px 3.0px at 393px 424px, rgba(255,255,255,0.82) 50%, transparent 100%),
-    radial-gradient(3.2px 3.2px at 84px 497px, rgba(255,255,255,0.8) 50%, transparent 100%),
-    radial-gradient(2.3px 2.3px at 264px 95px, rgba(255,255,255,0.7) 50%, transparent 100%),
-    radial-gradient(2.8px 2.8px at 9px 265px, rgba(255,255,255,0.68) 50%, transparent 100%),
-    radial-gradient(2.5px 2.5px at 411px 209px, rgba(255,255,255,0.66) 50%, transparent 100%),
-    radial-gradient(3.2px 3.2px at 314px 58px, rgba(255,255,255,0.72) 50%, transparent 100%),
-    radial-gradient(2.8px 2.8px at 385px 190px, rgba(255,255,255,0.61) 50%, transparent 100%),
-    radial-gradient(3.3px 3.3px at 23px 286px, rgba(255,255,255,0.72) 50%, transparent 100%),
-    radial-gradient(3.1px 3.1px at 482px 357px, rgba(255,255,255,0.82) 50%, transparent 100%),
-    radial-gradient(3.0px 3.0px at 74px 379px, rgba(255,255,255,0.57) 50%, transparent 100%),
-    radial-gradient(2.8px 2.8px at 474px 131px, rgba(255,255,255,0.8) 50%, transparent 100%),
-    radial-gradient(3.5px 3.5px at 272px 523px, rgba(255,255,255,0.69) 50%, transparent 100%),
-    radial-gradient(2.8px 2.8px at 35px 306px, rgba(255,255,255,0.88) 50%, transparent 100%),
-    radial-gradient(2.9px 2.9px at 127px 426px, rgba(255,255,255,0.57) 50%, transparent 100%),
-    radial-gradient(2.3px 2.3px at 49px 508px, rgba(255,255,255,0.87) 50%, transparent 100%),
-    radial-gradient(2.3px 2.3px at 360px 73px, rgba(255,255,255,0.88) 50%, transparent 100%),
-    radial-gradient(2.6px 2.6px at 536px 467px, rgba(255,255,255,0.68) 50%, transparent 100%),
-    radial-gradient(2.9px 2.9px at 414px 101px, rgba(255,255,255,0.66) 50%, transparent 100%),
-    radial-gradient(2.3px 2.3px at 356px 344px, rgba(255,255,255,0.74) 50%, transparent 100%);
-  animation: coral-snow-near 14s linear infinite;
-}
-.backgroundContainer::after {
-  top: -380px; height: calc(100% + 380px); background-size: 380px 380px; filter: blur(.4px);
-  background-image:
-    radial-gradient(1.5px 1.5px at 107px 322px, rgba(255,255,255,0.38) 50%, transparent 100%),
-    radial-gradient(1.7px 1.7px at 244px 144px, rgba(255,255,255,0.58) 50%, transparent 100%),
-    radial-gradient(1.1px 1.1px at 241px 368px, rgba(255,255,255,0.57) 50%, transparent 100%),
-    radial-gradient(1.7px 1.7px at 106px 258px, rgba(255,255,255,0.58) 50%, transparent 100%),
-    radial-gradient(1.7px 1.7px at 121px 134px, rgba(255,255,255,0.6) 50%, transparent 100%),
-    radial-gradient(1.1px 1.1px at 258px 180px, rgba(255,255,255,0.52) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 20px 36px, rgba(255,255,255,0.53) 50%, transparent 100%),
-    radial-gradient(1.7px 1.7px at 125px 288px, rgba(255,255,255,0.36) 50%, transparent 100%),
-    radial-gradient(1.3px 1.3px at 227px 106px, rgba(255,255,255,0.62) 50%, transparent 100%),
-    radial-gradient(1.3px 1.3px at 68px 180px, rgba(255,255,255,0.64) 50%, transparent 100%),
-    radial-gradient(1.2px 1.2px at 183px 267px, rgba(255,255,255,0.62) 50%, transparent 100%),
-    radial-gradient(1.7px 1.7px at 18px 349px, rgba(255,255,255,0.45) 50%, transparent 100%),
-    radial-gradient(1.9px 1.9px at 361px 51px, rgba(255,255,255,0.62) 50%, transparent 100%),
-    radial-gradient(1.6px 1.6px at 235px 85px, rgba(255,255,255,0.62) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 301px 318px, rgba(255,255,255,0.37) 50%, transparent 100%),
-    radial-gradient(1.2px 1.2px at 214px 161px, rgba(255,255,255,0.54) 50%, transparent 100%),
-    radial-gradient(2.0px 2.0px at 1px 182px, rgba(255,255,255,0.44) 50%, transparent 100%),
-    radial-gradient(1.2px 1.2px at 275px 23px, rgba(255,255,255,0.54) 50%, transparent 100%),
-    radial-gradient(1.6px 1.6px at 85px 183px, rgba(255,255,255,0.51) 50%, transparent 100%),
-    radial-gradient(1.7px 1.7px at 63px 363px, rgba(255,255,255,0.52) 50%, transparent 100%),
-    radial-gradient(1.2px 1.2px at 145px 113px, rgba(255,255,255,0.43) 50%, transparent 100%),
-    radial-gradient(1.2px 1.2px at 365px 82px, rgba(255,255,255,0.42) 50%, transparent 100%),
-    radial-gradient(1.6px 1.6px at 38px 304px, rgba(255,255,255,0.39) 50%, transparent 100%),
-    radial-gradient(1.3px 1.3px at 188px 230px, rgba(255,255,255,0.6) 50%, transparent 100%),
-    radial-gradient(1.2px 1.2px at 313px 145px, rgba(255,255,255,0.63) 50%, transparent 100%),
-    radial-gradient(1.8px 1.8px at 25px 282px, rgba(255,255,255,0.36) 50%, transparent 100%),
-    radial-gradient(1.4px 1.4px at 293px 94px, rgba(255,255,255,0.6) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 31px 165px, rgba(255,255,255,0.52) 50%, transparent 100%),
-    radial-gradient(1.9px 1.9px at 87px 206px, rgba(255,255,255,0.59) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 374px 55px, rgba(255,255,255,0.38) 50%, transparent 100%),
-    radial-gradient(1.6px 1.6px at 364px 238px, rgba(255,255,255,0.48) 50%, transparent 100%),
-    radial-gradient(1.4px 1.4px at 342px 92px, rgba(255,255,255,0.64) 50%, transparent 100%),
-    radial-gradient(1.3px 1.3px at 138px 145px, rgba(255,255,255,0.6) 50%, transparent 100%),
-    radial-gradient(1.3px 1.3px at 145px 120px, rgba(255,255,255,0.55) 50%, transparent 100%);
-  animation: coral-snow-far 22s linear infinite;
-}
-@keyframes coral-snow-near { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(70px, 560px, 0); } }
-@keyframes coral-snow-far  { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-40px, 380px, 0); } }
-
 /* string of lights under the top bar */
 .MuiAppBar-root::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -22px; height: 30px; pointer-events: none; z-index: 1;
@@ -108,10 +34,5 @@ html, .backgroundContainer, .ui-corner-all, .wizardStartForm {
   .card:hover .cardScalable { box-shadow: 0 12px 30px rgba(0,0,0,.5), 0 0 0 2px rgba(var(--coral-rgb) / .85), 0 0 22px rgba(255 210 160 / .25) !important; }
 }
 
-/* calm: no snow or lights while a video plays, or for people who prefer less motion */
-body:has(.videoPlayerContainer:not(.hide)) .backgroundContainer::before,
-body:has(.videoPlayerContainer:not(.hide)) .backgroundContainer::after,
+/* no lights while a video plays */
 body:has(.videoPlayerContainer:not(.hide)) .MuiAppBar-root::after { display: none; }
-@media (prefers-reduced-motion: reduce) {
-  .backgroundContainer::before, .backgroundContainer::after { animation: none; }
-}

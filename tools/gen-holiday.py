@@ -1,19 +1,9 @@
 #!/usr/bin/env python3
-"""Generates src/holiday.css (snow layers, Christmas lights, Santa hat). Deterministic: same output every run."""
+"""Generates src/holiday.css (Christmas lights, Santa hat, warm glow). Deterministic: same output every run."""
 import random, os
 rnd = random.Random(1225)
 enc = lambda s: s.replace('%', '%25').replace('#', '%23').replace('<', '%3C').replace('>', '%3E').replace('"', "'")
 
-def snow(tile, n, rmin, rmax, amin, amax):
-    out = []
-    for _ in range(n):
-        x, y = rnd.randint(0, tile), rnd.randint(0, tile)
-        r = round(rnd.uniform(rmin, rmax), 1); a = round(rnd.uniform(amin, amax), 2)
-        out.append(f'radial-gradient({r}px {r}px at {x}px {y}px, rgba(255,255,255,{a}) 50%, transparent 100%)')
-    return ',\n    '.join(out)
-
-near = snow(560, 22, 2.2, 3.6, .55, .9)   # big, fast, bright
-far = snow(380, 34, 1.1, 2.0, .35, .65)   # small, slow, dim
 
 # light string: sagging wire + 4 bulbs per 120px tile, each bulb twinkles on its own beat
 colors = ['#ff5a4e', '#ffd166', '#5fd38d', '#6fb6ff']
@@ -44,26 +34,6 @@ html, .backgroundContainer, .ui-corner-all, .wizardStartForm {{
     radial-gradient(900px 600px at 100% -10%, rgba(255 196 120 / .08), transparent 60%) !important;
 }}
 
-/* snow: two fixed layers behind the content */
-.backgroundContainer {{ overflow: hidden; }}
-.backgroundContainer::before, .backgroundContainer::after {{
-  content: ""; position: absolute; left: -10%; right: -10%; pointer-events: none; will-change: transform;
-}}
-.backgroundContainer::before {{
-  top: -560px; height: calc(100% + 560px); background-size: 560px 560px;
-  background-image:
-    {near};
-  animation: coral-snow-near 14s linear infinite;
-}}
-.backgroundContainer::after {{
-  top: -380px; height: calc(100% + 380px); background-size: 380px 380px; filter: blur(.4px);
-  background-image:
-    {far};
-  animation: coral-snow-far 22s linear infinite;
-}}
-@keyframes coral-snow-near {{ from {{ transform: translate3d(0, 0, 0); }} to {{ transform: translate3d(70px, 560px, 0); }} }}
-@keyframes coral-snow-far  {{ from {{ transform: translate3d(0, 0, 0); }} to {{ transform: translate3d(-40px, 380px, 0); }} }}
-
 /* string of lights under the top bar */
 .MuiAppBar-root::after {{
   content: ""; position: absolute; left: 0; right: 0; bottom: -22px; height: 30px; pointer-events: none; z-index: 1;
@@ -91,13 +61,8 @@ html, .backgroundContainer, .ui-corner-all, .wizardStartForm {{
   .card:hover .cardScalable {{ box-shadow: 0 12px 30px rgba(0,0,0,.5), 0 0 0 2px rgba(var(--coral-rgb) / .85), 0 0 22px rgba(255 210 160 / .25) !important; }}
 }}
 
-/* calm: no snow or lights while a video plays, or for people who prefer less motion */
-body:has(.videoPlayerContainer:not(.hide)) .backgroundContainer::before,
-body:has(.videoPlayerContainer:not(.hide)) .backgroundContainer::after,
+/* no lights while a video plays */
 body:has(.videoPlayerContainer:not(.hide)) .MuiAppBar-root::after {{ display: none; }}
-@media (prefers-reduced-motion: reduce) {{
-  .backgroundContainer::before, .backgroundContainer::after {{ animation: none; }}
-}}
 """
 out = os.path.join(os.path.dirname(__file__), '..', 'src', 'holiday.css')
 open(out, 'w').write(css)
