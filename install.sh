@@ -1,7 +1,7 @@
 #!/bin/sh
 # Coral theme for Jellyfin — one-time server install.
 #
-#   sudo ./install.sh                 # link the theme CSS from the CDN (updates follow the repo)
+#   sudo ./install.sh                 # link the theme CSS from GitHub Pages (updates follow the repo)
 #   sudo ./install.sh --inline        # embed dist/coral.css instead (works offline, no auto-updates)
 #   sudo ./install.sh --no-restart    # write everything but don't restart Jellyfin
 #   CSS_URL=https://... sudo ./install.sh   # link a different CSS URL (e.g. a pinned tag)
