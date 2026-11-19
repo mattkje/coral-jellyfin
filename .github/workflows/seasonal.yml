@@ -1,0 +1,40 @@
+# Rebuilds dist/coral.css every night so the holiday layer switches on (1 Dec) and off (3 Jan)
+# by itself; holiday.mode can force it on/off. Pushes only when the built CSS changed.
+name: Seasonal rebuild
+on:
+  schedule:
+    - cron: "5 23 * * *"   # 00:05 in Oslo during winter (UTC+1)
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [holiday.mode, src/**, tabler/**, tools/gen-holiday.py, build.sh]
+permissions:
+  contents: write
+  pages: write
+  actions: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build
+        run: ./build.sh
+      - name: Commit if the theme changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add dist
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Seasonal rebuild ($(TZ=Europe/Oslo date +%F))"
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || true
+      - name: Keep the schedule enabled
+        # GitHub pauses scheduled workflows after 60 days without activity; re-enabling resets that.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow enable seasonal.yml --repo "${{ github.repository }}" || true

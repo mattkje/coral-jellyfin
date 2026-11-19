@@ -659,3 +659,6 @@ html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPag
   background-position: center bottom !important; filter: drop-shadow(0 6px 24px rgba(0,0,0,.6));
 }
 .layout-mobile .itemDetailPage:has(.itemBackdrop[style*="url"]):has(.infoWrapper .detailImageContainer .portraitCard) .detailLogo:not(.hide) ~ .detailPageWrapperContainer .nameContainer:not(:has(.parentName:not(.hide))) .itemName { display: none !important; }
+
+/* loading spinner in coral instead of Jellyfin blue */
+.mdl-spinner__layer-1, .mdl-spinner__layer-2, .mdl-spinner__layer-3, .mdl-spinner__layer-4 { border-color: var(--coral) !important; }
