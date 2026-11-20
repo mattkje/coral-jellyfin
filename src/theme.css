@@ -585,55 +585,62 @@ html.layout-mobile:has(.displayingBackdropImage) .itemDetailPage:has(.detailImag
 .itemDetailPage:has(.detailImageContainer .squareCard):not(:has(.musicParentName)) .itemMiscInfo-primary { margin-top: .35em; }
 
 
-/* ================= v6: shows / movies / seasons — streaming-app hero (desktop, with backdrop) ================= */
+/* ================= v6: shows / movies / seasons — streaming-app hero ================= */
+/* The hero layout keys off the page structure only, not off the backdrop photo having loaded
+   (.displayingBackdropImage / .itemBackdrop[style*=url] appear seconds later, which made the page
+   jump from the classic layout to the hero). Until a photo shows, the hero area gets the coral ambience. */
 /* full-bleed photo, darkened from the left and top so the text reads */
 html.layout-desktop:has(.displayingBackdropImage) body:has(.itemDetailPage:not(.hide) .detailPagePrimaryContainer > .detailImageContainer .portraitCard) .backgroundContainer.withBackdrop {
   background:
     linear-gradient(90deg, rgba(13,11,10,.94) 0, rgba(13,11,10,.72) 28%, rgba(13,11,10,.18) 58%, transparent 80%),
     linear-gradient(180deg, rgba(13,11,10,.6) 0, transparent 20vh) !important;
 }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemBackdrop { height: 76vh !important; -webkit-mask-image: none !important; mask-image: none !important; background: none !important; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemBackdrop::after { display: none; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailPagePrimaryContainer > .detailImageContainer { display: none !important; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemBackdrop { height: 76vh !important; -webkit-mask-image: none !important; mask-image: none !important; background: none !important; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemBackdrop::after { display: none; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailPagePrimaryContainer > .detailImageContainer { display: none !important; }
 /* logo bottom-left */
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailLogo {
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailLogo {
   display: block; left: 3.3% !important; right: auto !important; transform: none !important;
   top: calc(76vh - 13.5em - 21vh) !important; height: 20vh !important; width: min(34vw, 540px) !important;
   background-position: left bottom !important; filter: drop-shadow(0 8px 30px rgba(0,0,0,.55));
 }
+html.layout-desktop:not(:has(.displayingBackdropImage)) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemBackdrop {
+  background: radial-gradient(70% 90% at 15% 0%, rgba(var(--coral-rgb) / .20), transparent 70%),
+              radial-gradient(50% 70% at 90% 10%, rgba(255 154 92 / .10), transparent 70%) !important;
+}
 /* name, meta and buttons stacked under it, left-aligned */
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailRibbon {
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailRibbon {
   padding-left: 3.3% !important; padding-right: 3.3% !important; margin-top: -13.5em !important;
   flex-direction: column !important; align-items: flex-start !important; text-align: left; height: auto !important; min-height: 0 !important;
   flex-wrap: nowrap !important;
 }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .infoWrapper { flex: none !important; width: 100%; max-width: 48em; margin-left: 0 !important; padding-left: 0 !important; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .nameContainer, html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemMiscInfo { align-items: flex-start; justify-content: flex-start; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemName.infoText { font-size: clamp(2.4rem, 4.2vw, 4.2rem) !important; letter-spacing: -.035em !important; line-height: 1.02; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailLogo:not(.hide) ~ .detailPageWrapperContainer .nameContainer:not(:has(.parentName:not(.hide))) .itemName { display: none !important; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemMiscInfo-primary { font-size: 1.02rem; margin-top: .25em; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .mainDetailButtons { justify-content: flex-start !important; margin: 1.1em 0 0 !important; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .mainDetailButtons .detailButton { width: 3.1em; height: 3.1em; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .mainDetailButtons .btnPlay { height: 3.1em; padding: 0 1.9em 0 1.4em !important; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .mainDetailButtons .btnPlay::after { font-size: 1.08rem; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .infoWrapper { flex: none !important; width: 100%; max-width: 48em; margin-left: 0 !important; padding-left: 0 !important; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .nameContainer, html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemMiscInfo { align-items: flex-start; justify-content: flex-start; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemName.infoText { font-size: clamp(2.4rem, 4.2vw, 4.2rem) !important; letter-spacing: -.035em !important; line-height: 1.02; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailLogo:not(.hide) ~ .detailPageWrapperContainer .nameContainer:not(:has(.parentName:not(.hide))) .itemName { display: none !important; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemMiscInfo-primary { font-size: 1.02rem; margin-top: .25em; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .mainDetailButtons { justify-content: flex-start !important; margin: 1.1em 0 0 !important; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .mainDetailButtons .detailButton { width: 3.1em; height: 3.1em; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .mainDetailButtons .btnPlay { height: 3.1em; padding: 0 1.9em 0 1.4em !important; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .mainDetailButtons .btnPlay::after { font-size: 1.08rem; }
 /* content below: description left, details card right */
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailPageWrapperContainer {
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailPageWrapperContainer {
   background: linear-gradient(to bottom, transparent 0, transparent 9em, rgba(13,11,10,.82) 18em, var(--coral-bg) 30em) !important;
 }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailPagePrimaryContent { padding-left: 3.3% !important; padding-right: 3.3% !important; margin-top: 2.4em; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailSection {
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailPagePrimaryContent { padding-left: 3.3% !important; padding-right: 3.3% !important; margin-top: 2.4em; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailSection {
   display: grid !important; grid-template-columns: minmax(0, 1.7fr) minmax(16em, 1fr); column-gap: 3.5em; align-items: start; max-width: none !important;
 }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailSection > .hide { display: none !important; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailSection > .trackSelections { grid-column: 1 / -1; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .overview, html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .overview p { max-width: 62ch; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemDetailsGroup { margin-top: 0; gap: 1em; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemDetailsGroup:has(.detailsGroupItem:not(.hide)) {
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailSection > .hide { display: none !important; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailSection > .trackSelections { grid-column: 1 / -1; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .overview, html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .overview p { max-width: 62ch; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemDetailsGroup { margin-top: 0; gap: 1em; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemDetailsGroup:has(.detailsGroupItem:not(.hide)) {
   padding: 1.1em 1.3em; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid var(--coral-line);
 }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailsGroupItem:not(.hide) { display: grid !important; gap: .3em; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailsGroupItem > * { margin: 0 !important; min-height: 0 !important; }
-html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemDetailsGroup > div:empty { display: none; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailsGroupItem:not(.hide) { display: grid !important; gap: .3em; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .detailsGroupItem > * { margin: 0 !important; min-height: 0 !important; }
+html.layout-desktop .itemDetailPage:has(.detailPagePrimaryContainer > .detailImageContainer .portraitCard) .itemDetailsGroup > div:empty { display: none; }
 
 /* two-column info grid: only description + details side by side; every row section spans full width */
 .itemDetailPage .detailSection > .verticalSection, .itemDetailPage .detailSection > .detailVerticalSection,
@@ -646,19 +653,19 @@ html.layout-desktop:has(.displayingBackdropImage) .itemDetailPage:has(.detailPag
 }
 
 /* ---- phone: shows / movies / seasons with a backdrop — tall photo, logo centred on its lower edge, no repeated poster ---- */
-.layout-mobile .itemDetailPage:has(.itemBackdrop[style*="url"]):has(.infoWrapper .detailImageContainer .portraitCard) .itemBackdrop {
+.layout-mobile .itemDetailPage:has(.infoWrapper .detailImageContainer .portraitCard) .itemBackdrop {
   height: 62vh !important; background-position: center top !important;
   -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%) !important; mask-image: linear-gradient(to bottom, #000 55%, transparent 100%) !important;
 }
-.layout-mobile .itemDetailPage:has(.itemBackdrop[style*="url"]):has(.infoWrapper .detailImageContainer .portraitCard) .infoWrapper .detailImageContainer { display: none !important; }
-.layout-mobile .itemDetailPage:has(.itemBackdrop[style*="url"]):has(.infoWrapper .detailImageContainer .portraitCard) .detailRibbon { margin-top: -7.5em !important; position: relative; z-index: 2; }
-.layout-mobile .itemDetailPage:has(.itemBackdrop[style*="url"]):has(.infoWrapper .detailImageContainer .portraitCard) .itemName.infoText { text-shadow: 0 2px 24px rgba(0,0,0,.7); }
-.layout-mobile .itemDetailPage:has(.itemBackdrop[style*="url"]):has(.infoWrapper .detailImageContainer .portraitCard) .detailLogo {
+.layout-mobile .itemDetailPage:has(.infoWrapper .detailImageContainer .portraitCard) .infoWrapper .detailImageContainer { display: none !important; }
+.layout-mobile .itemDetailPage:has(.infoWrapper .detailImageContainer .portraitCard) .detailRibbon { margin-top: -7.5em !important; position: relative; z-index: 2; }
+.layout-mobile .itemDetailPage:has(.infoWrapper .detailImageContainer .portraitCard) .itemName.infoText { text-shadow: 0 2px 24px rgba(0,0,0,.7); }
+.layout-mobile .itemDetailPage:has(.infoWrapper .detailImageContainer .portraitCard) .detailLogo {
   display: block !important; position: absolute !important; z-index: 2; transform: none !important;
   top: calc(49vh - 176px) !important; left: 12vw !important; right: auto !important; width: 76vw !important; height: 13vh !important;
   background-position: center bottom !important; filter: drop-shadow(0 6px 24px rgba(0,0,0,.6));
 }
-.layout-mobile .itemDetailPage:has(.itemBackdrop[style*="url"]):has(.infoWrapper .detailImageContainer .portraitCard) .detailLogo:not(.hide) ~ .detailPageWrapperContainer .nameContainer:not(:has(.parentName:not(.hide))) .itemName { display: none !important; }
+.layout-mobile .itemDetailPage:has(.infoWrapper .detailImageContainer .portraitCard) .detailLogo:not(.hide) ~ .detailPageWrapperContainer .nameContainer:not(:has(.parentName:not(.hide))) .itemName { display: none !important; }
 
 /* loading spinner in coral instead of Jellyfin blue */
 .mdl-spinner__layer-1, .mdl-spinner__layer-2, .mdl-spinner__layer-3, .mdl-spinner__layer-4 { border-color: var(--coral) !important; }
